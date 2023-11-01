@@ -7,22 +7,23 @@ let dateValue = document.querySelector(".date-value");
 let namevalue = document.querySelector(".name-value");
 let numbervalue = document.querySelector(".number-value");
 let cardNumber = document.querySelector("#Number");
-let name = document.querySelector("#name");
+let names = document.querySelector("#name");
 let card = document.querySelector(".card");
 let thanks = document.querySelector(".thank-you");
-cardNumber.oninput = function () {
+// real time display
+cardNumber.addEventListener("input", function () {
   let format = cardNumber.value.match(/\d{4}/g).join(" ");
   numbervalue.innerHTML = format;
-};
-name.oninput = function () {
-  namevalue.innerHTML = name.value;
-};
-date[0].oninput = function () {
-  if (date[0].value != " ") {
+});
+names.addEventListener("input", function () {
+  namevalue.innerHTML = names.value;
+});
+date[0].addEventListener("input", function (e) {
+  if (date[0].value != "") {
     dateValue.dataset.month = date[0].value.match(/\d+/);
     dateValue.innerHTML = `${dateValue.dataset.month}/${dateValue.dataset.year}`;
   }
-};
+});
 date[1].oninput = function () {
   if (date[1].value != " ") {
     dateValue.dataset.year = date[1].value.match(/\d+/);
@@ -32,12 +33,48 @@ date[1].oninput = function () {
 cvc.addEventListener("input", function () {
   cvcValue.innerHTML = cvc.value.match(/\d+/);
 });
+// ######
+// reset values
+cardNumber.addEventListener("blur", () => {
+  if (cardNumber.value === "") {
+    numbervalue.innerHTML = "0000 0000 0000 0000";
+  }
+});
+
+names.addEventListener("blur", () => {
+  console.log(1);
+  if (names.value === "") {
+    namevalue.innerHTML = "Jane Appleseed";
+  }
+});
+
+date[0].addEventListener("blur", () => {
+  if (date[0].value === "") {
+    dateValue.dataset.month = "00";
+    dateValue.innerHTML = `${dateValue.dataset.month}/${dateValue.dataset.year}`;
+  }
+});
+
+date[1].addEventListener("blur", () => {
+  if (date[1].value === "") {
+    dateValue.dataset.year = "00";
+    dateValue.innerHTML = `${dateValue.dataset.month}/${dateValue.dataset.year}`;
+  }
+});
+cvc.addEventListener("blur", () => {
+  if (cvc.value === "") {
+    cvcValue.innerHTML = "000";
+  }
+});
+// ######
+// flip card
 cvc.addEventListener("focus", () => {
   card.classList.add("flip");
 });
 cvc.addEventListener("blur", () => {
   card.classList.remove("flip");
 });
+// ####
 form.onsubmit = function (e) {
   e.preventDefault();
   inputs.forEach((e) => {
