@@ -42,7 +42,6 @@ cardNumber.addEventListener("blur", () => {
 });
 
 names.addEventListener("blur", () => {
-  console.log(1);
   if (names.value === "") {
     namevalue.innerHTML = "Jane Appleseed";
   }
@@ -112,3 +111,22 @@ form.onsubmit = function (e) {
     thanks.style.display = "block";
   }
 };
+
+let end = document.querySelector(".end");
+let display = document.querySelector(".display");
+end.addEventListener("click", function () {
+  thanks.style.transition = "0.5s";
+  thanks.style.opacity = "0";
+  setTimeout(() => {
+    thanks.style.display = "none";
+    display.style.display = "block";
+  }, 500);
+  setTimeout(() => {
+    display.style.opacity = "1";
+  }, 600);
+  card.style.cssText = "transform:scale(0.6) translate(-82%,61%) ";
+  document.querySelector(".show-name").innerHTML = namevalue.innerHTML;
+  document.querySelector(".show-number").innerHTML = numbervalue.innerHTML;
+  document.querySelector(".show-date").innerHTML = dateValue.innerHTML;
+  document.querySelector(".show-cvc").innerHTML = cvcValue.innerHTML;
+});
