@@ -1,0 +1,264 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: "Space Grotesk", sans-serif;
+  margin: 0;
+}
+main {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+}
+main > div:first-of-type {
+  perspective: 1500px;
+  position: relative;
+
+  flex: 0.5;
+  background-image: url("images/bg-main-desktop.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+}
+
+main div:first-of-type article {
+  position: absolute;
+  top: 0;
+  left: 0;
+  & > *:not(img) {
+    position: absolute;
+  }
+  &:first-of-type {
+    & section {
+      &:first-of-type {
+        top: 20px;
+        left: 50px;
+      }
+      &:nth-of-type(2) {
+        top: 112px;
+        left: 0;
+        font-size: 30px;
+        color: white;
+        width: 100%;
+        text-align: center;
+      }
+      &:last-of-type {
+        bottom: 20px;
+        left: 20px;
+        width: 90%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: white;
+      }
+    }
+  }
+  &:last-of-type {
+    & section {
+      color: white;
+      top: 110px;
+      right: 50px;
+      letter-spacing: 1px;
+    }
+  }
+}
+main > div:last-of-type {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+form {
+  width: 400px;
+  & > div {
+    justify-content: space-between !important;
+    display: flex;
+    align-items: center;
+    & div {
+      margin: 5px 0 !important;
+    }
+    & label {
+      flex: 0.9;
+      & input {
+        width: 98%;
+      }
+    }
+  }
+
+  & label {
+    display: block;
+    color: hsl(278, 68%, 11%);
+  }
+  & input {
+    width: 99%;
+    height: 91%;
+    padding: 10px;
+    border: none;
+    position: absolute;
+    top: 52%;
+    left: 50%;
+    transform: translate(-50%, -52%);
+    border-radius: 6px;
+    outline: none;
+
+    &::placeholder {
+      color: hsl(279, 6%, 55%);
+    }
+  }
+}
+.btn {
+  padding: 13px;
+  width: 100%;
+  border-radius: 6px;
+  background-color: hsl(278, 68%, 11%);
+  color: hsl(270, 3%, 87%);
+  margin-top: 20px;
+  border: none;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+fieldset {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: none;
+  padding: 0;
+  margin: 0;
+  width: 50%;
+  & div {
+    width: 50%;
+  }
+  & input {
+    width: 97%;
+  }
+}
+.thank-you {
+  display: none;
+  text-align: center;
+  & img {
+    display: block;
+    margin: auto;
+  }
+  & h2 {
+    color: hsl(278, 68%, 11%);
+  }
+  & p {
+    color: hsl(279, 6%, 55%);
+  }
+}
+label > div,
+fieldset > div {
+  border-radius: 6px;
+  background-color: hsl(270, 3%, 87%);
+  height: 35px;
+  position: relative;
+  margin: 5px 0;
+}
+
+.border:has(input:focus) {
+  background-image: linear-gradient(hsl(249, 99%, 64%), hsl(278, 94%, 30%));
+}
+.err-empty {
+  position: relative;
+  background-color: hsl(0, 100%, 66%);
+  margin-bottom: 20px;
+  &:has(input:focus) {
+    background-image: none;
+  }
+  & input {
+    color: hsl(0, 100%, 66%);
+  }
+  &:after {
+    content: "cannot be blank";
+    position: absolute;
+    top: 105%;
+    left: -1px;
+    color: red;
+    font-size: 12px;
+  }
+}
+.err-letter {
+  position: relative;
+  background-color: hsl(0, 100%, 66%);
+  margin-bottom: 20px;
+  &:has(input:focus) {
+    background-image: none;
+  }
+  & input {
+    color: hsl(0, 100%, 66%);
+  }
+  &:after {
+    content: "only numbers";
+    position: absolute;
+    top: 105%;
+    left: -1px;
+    color: red;
+    font-size: 12px;
+  }
+}
+.err-card-format {
+  position: relative;
+  background-color: hsl(0, 100%, 66%);
+  margin-bottom: 20px;
+  &:has(input:focus) {
+    background-image: none;
+  }
+  & input {
+    color: hsl(0, 100%, 66%);
+  }
+  &:after {
+    content: "wrong card format";
+    position: absolute;
+    top: 105%;
+    left: -1px;
+    color: red;
+    font-size: 12px;
+  }
+}
+.card {
+  position: absolute;
+  left: 44%;
+  top: 70px;
+  transform-style: preserve-3d;
+  transition: 1s;
+  transform-origin: center;
+  height: 245px;
+  width: 447px;
+
+  & article {
+    backface-visibility: hidden;
+    height: 245px;
+    &:last-of-type {
+      transform: rotatey(180deg);
+    }
+  }
+}
+.flip {
+  transform: rotateY(-180deg);
+}
+@media (max-width: 650px) {
+  main {
+    flex-flow: column;
+  }
+  .card {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .flip {
+    transform: translateX(-50%) rotatey(180deg);
+  }
+}
+@media (max-width: 500px) {
+  form {
+    width: 300px;
+  }
+  .card {
+    top: 170px;
+    transform: scale(0.6) translateX(-94%);
+  }
+  .flip {
+    transform: scale(0.6) translateX(-94%) rotatey(180deg);
+  }
+}
