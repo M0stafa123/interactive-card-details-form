@@ -87,25 +87,33 @@ form.onsubmit = function (e) {
   if (!/^[0-9]+$/.test(cardNumber.value)) {
     cardNumber.parentElement.classList.add("err-letter");
   } else if (cardNumber.parentElement.classList.contains("err-letter")) {
-    cardNumber.parentElement.classList.remove("err-letter");
+    removeClass(cardNumber.parentElement, "err-letter");
   }
   if (cardNumber.value.length < 16) {
-    cardNumber.parentElement.classList.add("err-card-format");
-  } else if (cardNumber.parentElement.classList.contains("err-card-format")) {
-    cardNumber.parentElement.classList.remove("err-card-format");
+    addClass(cardNumber.parentElement, "err-format");
+  } else if (isClass(cardNumber.parentElement, "err-format")) {
+    removeClass(cardNumber.parentElement, "err-format");
   }
   document.querySelectorAll("form > div input").forEach((e) => {
     if (!/^[0-9]+$/.test(e.value)) {
-      e.parentElement.classList.add("err-letter");
-    } else if (e.parentElement.classList.contains("err-letter")) {
+      addClass(e.parentElement, "err-letter");
+    } else if (isClass(e.parentElement, "err-letter")) {
       e.parentElement.classList.remove("err-letter");
     }
   });
   let arr = Array.from(inputs);
+  if (date[0].value > 12) {
+    addClass(date[0].parentElement, "err-format");
+  } else if (
+    date[0].value > 12 ||
+    isClass(date[0].parentElement, "err-format")
+  ) {
+    removeClass(date[0].parentElement, "err-format");
+  }
   if (
-    arr.every((e) => !e.parentElement.classList.contains("err-empty")) &&
-    arr.every((e) => !e.parentElement.classList.contains("err-letter")) &&
-    arr.every((e) => !e.parentElement.classList.contains("err-card-format"))
+    arr.every((e) => !isClass(e.parentElement, "err-empty")) &&
+    arr.every((e) => !isClass(e.parentElement, "err-letter")) &&
+    arr.every((e) => !isClass(e.parentElement, "err-format"))
   ) {
     form.style.display = "none";
     thanks.style.display = "block";
@@ -126,7 +134,17 @@ end.addEventListener("click", function () {
   }, 600);
   card.style.cssText = "transform:scale(0.6) translate(-82%,61%) ";
   document.querySelector(".show-name").innerHTML = namevalue.innerHTML;
-  document.querySelector(".show-number").innerHTML = numbervalue.innerHTML;
+  document.querySelector(".show-number").innerHTML =
+    numbervalue.innerHTML.replaceAll(" ", "-");
   document.querySelector(".show-date").innerHTML = dateValue.innerHTML;
   document.querySelector(".show-cvc").innerHTML = cvcValue.innerHTML;
 });
+function addClass(e, cls) {
+  e.classList.add(cls);
+}
+function removeClass(e, cls) {
+  e.classList.remove(cls);
+}
+function isClass(e, cls) {
+  return e.classList.contains(cls);
+}

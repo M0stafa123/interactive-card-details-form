@@ -168,7 +168,8 @@ fieldset > div {
 .border:has(input:focus) {
   background-image: linear-gradient(hsl(249, 99%, 64%), hsl(278, 94%, 30%));
 }
-.err-empty {
+
+.err-format {
   position: relative;
   background-color: hsl(0, 100%, 66%);
   margin-bottom: 20px;
@@ -179,7 +180,7 @@ fieldset > div {
     color: hsl(0, 100%, 66%);
   }
   &:after {
-    content: "cannot be blank";
+    content: "wrong format";
     position: absolute;
     top: 105%;
     left: -1px;
@@ -206,7 +207,8 @@ fieldset > div {
     font-size: 10px;
   }
 }
-.err-card-format {
+
+.err-empty {
   position: relative;
   background-color: hsl(0, 100%, 66%);
   margin-bottom: 20px;
@@ -217,7 +219,7 @@ fieldset > div {
     color: hsl(0, 100%, 66%);
   }
   &:after {
-    content: "wrong card format";
+    content: "cannot be blank";
     position: absolute;
     top: 105%;
     left: -1px;
