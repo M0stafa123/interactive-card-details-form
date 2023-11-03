@@ -10,6 +10,17 @@ let cardNumber = document.querySelector("#Number");
 let names = document.querySelector("#name");
 let card = document.querySelector(".card");
 let thanks = document.querySelector(".thank-you");
+// add delete and check classes
+function addClass(e, cls) {
+  e.classList.add(cls);
+}
+function removeClass(e, cls) {
+  e.classList.remove(cls);
+}
+function isClass(e, cls) {
+  return e.classList.contains(cls);
+}
+//  ####
 // real time display
 cardNumber.addEventListener("input", function () {
   let format = cardNumber.value.match(/\d{4}/g).join(" ");
@@ -139,12 +150,3 @@ end.addEventListener("click", function () {
   document.querySelector(".show-date").innerHTML = dateValue.innerHTML;
   document.querySelector(".show-cvc").innerHTML = cvcValue.innerHTML;
 });
-function addClass(e, cls) {
-  e.classList.add(cls);
-}
-function removeClass(e, cls) {
-  e.classList.remove(cls);
-}
-function isClass(e, cls) {
-  return e.classList.contains(cls);
-}
