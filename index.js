@@ -10,7 +10,7 @@ let cardNumber = document.querySelector("#Number");
 let names = document.querySelector("#name");
 let card = document.querySelector(".card");
 let thanks = document.querySelector(".thank-you");
-// add delete and check classes
+// add, delete and check classes
 function addClass(e, cls) {
   e.classList.add(cls);
 }
